@@ -131,18 +131,17 @@ public final class StudentAnalytics {
     }
 
     /**
-     * TODO compute the number of students who have failed the course who are
+     * Computes the number of students who have failed the course who are
      * also older than 20 years old. A failing grade is anything below a 65. A
      * student has only failed the course if they have a failing grade and they
-     * are not currently active. This should mirror the functionality of
-     * countNumberOfFailedStudentsOlderThan20Imperative. This method should not
-     * use any loops.
+     * are not currently active.
      *
      * @param studentArray Student data for the class.
      * @return Number of failed grades from students older than 20 years old.
      */
-    public int countNumberOfFailedStudentsOlderThan20ParallelStream(
-            final Student[] studentArray) {
-        throw new UnsupportedOperationException();
+    public int countNumberOfFailedStudentsOlderThan20ParallelStream(final Student[] studentArray) {
+        return (int) Arrays.stream(studentArray).parallel()
+            .filter(s -> !s.checkIsCurrent() && s.getAge() > 20 && s.getGrade() < 65)
+            .count();
     }
 }
